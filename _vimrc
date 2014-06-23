@@ -1,135 +1,123 @@
-colorscheme admincheg_transp
 
-set nocompatible
-set backspace=indent,eol,start
-set nobackup
-
-set history=50
-set ruler
-set showcmd
-set incsearch
-set nu
-set smarttab
-set showmatch
-set smartindent
-
-" Enable softtab for 4 spaces
-set softtabstop=2
-set shiftwidth=2
-set expandtab
-set tabstop=2
-
-set sw=2
-set t_Co=256
-
-set list
-set listchars=""
-set listchars+=tab:->
-set listchars+=precedes:<,extends:>
-set wildmenu
-set autoread
-"set relativenumber
-set wcm=<Tab>
+" Set variables {{{
+set ar
+set autoindent
+set backspace=start,indent,eol
+set clipboard=unnamed
+set copyindent
+set dir=~/.vim/tmp
 set encoding=utf-8
-set termencoding=utf-8
-
 set fileencodings=utf-8,cp1251,cp866,koi8-r
-set statusline=%<%f%h%m%r%=format=%{&fileformat}\ file=%{&fileencoding}\ enc=%{&encoding}\ %b\ 0x%B\ %l,%c%V\ %P
-set laststatus=2
+set foldenable
+set foldmethod=marker
 set hlsearch
+set ignorecase
+set laststatus=2
+set nobackup
+set nocompatible
+set noexpandtab
+set nosmarttab
+set nu
+set number
+set ruler
+set shiftwidth=2
+set showcmd
+set showmatch
+set showmatch
+set showmode
+set smartcase
+set smartindent
+set softtabstop=2
+set statusline=%F%m%r%h%w\ <\ FORMAT=%{&ff}\ %{&ft}\ <\ TYPE=%Y\ <\ POS=%l,%v\ %p%%\ <\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
 set synmaxcol=2048
-set foldmethod=syntax
-set foldmarker=vimfold\ {,}\ vimfold
+set t_Co=256
+set tabstop=2
+set termencoding=utf-8
+set wildchar=<TAB>
+set wildmenu
+set wrapscan
+" }}}
 
+" Enable functionally {{{
+colorscheme admincheg_transp
 syntax on
+" }}}
 
-inoremap {<CR> {<CR>}<ESC>ko
-nnoremap <C-E> ,
-noremap <leader>p :exe PhpDoc()<cr>
+" Filetype configs {{{
+filetype on
+filetype indent on
+filetype plugin on
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType php set expandtab
+" }}}
 
-map Q gq
+" Cursor settings {{{
+set viminfo='10,\"100,:20,%,n~/.viminfo
+autocmd BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+" }}}
 
-nmap <silent> ,p :set invpaste<CR>:set paste?<CR>
-nmap ,ua :call HighlightAllOfWord(1)<cr>
-nmap ,uA :call HighlightAllOfWord(0)<cr>
-" Underline the current line with '='
-nmap <silent> ,u= :t.\|s/./=/g\|:nohls<cr>
-nmap <silent> ,u- :t.\|s/./-/g\|:nohls<cr>
-nmap <Tab> <C-w><C-w>
-nmap <F2> :w<cr>
-imap <F2> <esc>:w<cr>i
-nmap <F3> :SvnCi<cr>
-imap <F3> <esc>:SvnCi<cr>i
-nmap <F4> :NERDTreeToggle<cr>
-vmap <F4> <esc>:NERDTreeToggle<cr>
-imap <F4> <esc>:NERDTreeToggle<cr>i
-nmap <C-e> viwy:ta <C-r>0<cr>
-imap <C-e> <esc>viwy:ta <C-r>0<cr>
-vmap <C-e> <esc>viw:ta <C-r>0<cr>
-nmap <C-h> :noh<cr>
-vmap <C-h> <esc>:noh<cr>
+" Autoreload config {{{
+autocmd! bufwritepost .vimrc source ~/.vimrc
+" }}}
 
-if &diff
-  map <F5> [c
-  map <F6> do
-  map <F7> dp
-  map <F8> ]c
-  map <F10> <esc>:qa<cr>
-else
-  nmap <F5> :BufExplorer<cr>
-  imap <F5> <esc>:BufExplorer<cr>
-  vmap <F5> <esc>:BufExplorer<cr>
-  map <F7> :execute RotateFileFormat()<cr>
-  vmap <F7> <C-C><F7>
-  imap <F7> <C-O><F7>
-  map <F8> :execute RotateEnc()<cr>
-  vmap <F8> <C-C><F8>
-  imap <F8> <C-O><F8>
+" Airline {{{
+if !exists('g:airline_symbols')
+	let g:airline_symbols = {}
 endif
 
+let g:airline_powerline_fonts = 1
+let g:airline_theme = "murmur"
 
-let b:fformatindex=0
-function! RotateFileFormat()
-  let y = -1
-  while y == -1
-    let encstring = "#unix#dos#mac#"
-    let x = match(encstring,"#",b:fformatindex)
-    let y = match(encstring,"#",x+1)
-    let b:fformatindex = x+1
-    if y == -1
-      let b:fformatindex = 0
-    else
-      let str = strpart(encstring,x+1,y-x-1)
-      return ":set fileformat=".str
-    endif
-  endwhile
-endfunction
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
 
-let b:encindex=0
-function! RotateEnc()
-  let y = -1
-  while y == -1
-    let encstring = "#utf-8#cp1251#cp866#koi8-r#8bit-cp#"
-    let x = match(encstring,"#",b:encindex)
-    let y = match(encstring,"#",x+1)
-    let b:encindex = x+1
-    if y == -1
-      let b:encindex = 0
-    else
-      let str = strpart(encstring,x+1,y-x-1)
-      return ":e ++enc=".str
-    endif
-  endwhile
-endfunction
+let g:airline#extensions#branch#use_vcscommand = 1
 
-function! HighlightAllOfWord(onoff)
-    if a:onoff == 1
-        :augroup highlight_all
-            :au!
-            :au CursorMoved * silent! exe printf('match Search /\<%s\>/', expand('<cword>'))
-        :augroup END
-    else
-        :au! highlight_all
-        match none /\<%s\>/
-    endif
-endfunction
+" }}}
+
+" PHPQA {{{
+let g:phpqa_codesniffer_autorun = 0
+let g:phpqa_messdetector_autorun = 0
+let g:phpqa_codecoverage_autorun = 1
+" }}}
+
+" Snippets {{{
+let g:snips_author = 'Павлихин Илья <vistilya@gmail.com>'
+" }}}
+
+" NERDTree {{{
+let g:NERDTreeWinPos = "right"
+" }}}
+
+" Bindings {{{
+	" Codes {{{
+	" Для вставки кодов используй <C-V><сочетание>
+	"
+	" Используемое
+	" [11^ - <C-F1>
+	" [12^ - <C-F2>
+	" [13^ - <C-F3>
+	" }}}
+
+	" Keys {{{
+		map <silent> [11^ <plug>ToggleProject
+
+		map <F2> :w<CR>
+		map! <F2> <ESC>:w<CR>li
+
+		map [12^ :VCSUp<CR>
+		map! [12^ <ESC>:VCSUp<CR>
+
+		map <silent> <F3> :NERDTreeToggle<CR>
+
+		map [13^ :VCSCommit<CR>
+		map! [13^ <ESC>:VCSCommit<CR>
+
+		map <Tab> <C-W><C-W>
+	" }}}
+" }}}
