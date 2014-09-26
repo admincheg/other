@@ -202,12 +202,18 @@ bindsym $win+r mode "resize"
 bar {
   id left-bott
   status_command /home/pavlihin/.scripts/conky-i3wm
+  mode hide
+  hidden_state hide
+  modifier $win
   output xinerama-0
 }
 
 bar {
   id right-bott
   status_command i3status
+  mode hide
+  hidden_state hide
+  modifier $win
   output xinerama-1
 }
 

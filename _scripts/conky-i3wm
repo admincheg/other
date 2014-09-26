@@ -1,0 +1,8 @@
+#!/bin/sh
+
+echo '{"version":1}
+[
+ [],
+'
+
+conky -f /home/pavlihin/.conkyrc

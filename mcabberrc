@@ -1,0 +1,35 @@
+# Configs {{{
+set jid=admincheg@jabber.ru
+set password=----------------------
+set lang = ru
+set mnotify_enable = 1
+roster hide_offline
+# }}}
+
+# Dictionary {{{
+set aspell_enable = 1
+set aspell_lang = ru_RU
+set aspell_encoding = UTF-8
+# }}}
+
+# Binds {{{
+bind 17 = roster unread_next      # ^q
+bind 269 = roster toggle_offline  # F5
+bind 276 = roster toggle          # F12
+# }}}
+
+# Colors {{{
+set color_background   = 234 
+set color_general      = 244
+set color_info         = 240
+set color_msgin        = 166
+set color_msgout       = 64
+set color_msghl        = 136
+set color_bgstatus     = 235
+set color_status       = 166
+set color_roster       = 240
+set color_bgrostersel  = 235
+set color_rostersel    = 166
+set color_rosterselmsg = 136
+set color_rosternewmsg = 136
+# }}}

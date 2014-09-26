@@ -1,5 +1,5 @@
-mcabber*font:            xft:Anonymous Pro Minus:pixelsize=15
-URxvt*font:              xft:Inconsolata:size=12
+mcabber*font:            xft:Anonymice Powerline:pixelsize=15
+URxvt*font:              xft:Droid Sans Mono for Powerline:size=10
 URxvt*scrollBar:         false
 URxvt*imLocale:          ru_RU.UTF-8
 URxvt*saveLines:         1024
