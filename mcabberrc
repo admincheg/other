@@ -1,9 +1,9 @@
 # Configs {{{
-set jid=admincheg@jabber.ru
-set password=----------------------
+set jid = admincheg@jabber.ru
+set password = -------------------------
 set lang = ru
 set mnotify_enable = 1
-roster hide_offline
+set roster_display_filter = ofdna
 # }}}
 
 # Dictionary {{{
@@ -19,17 +19,17 @@ bind 276 = roster toggle          # F12
 # }}}
 
 # Colors {{{
-set color_background   = 234 
+set color_background   = default 
 set color_general      = 244
 set color_info         = 240
-set color_msgin        = 166
-set color_msgout       = 64
+set color_msgin        = 178
+set color_msgout       = 166 
 set color_msghl        = 136
 set color_bgstatus     = 235
 set color_status       = 166
-set color_roster       = 240
+set color_roster       = 101
 set color_bgrostersel  = 235
 set color_rostersel    = 166
 set color_rosterselmsg = 136
-set color_rosternewmsg = 136
+set color_rosternewmsg = 220
 # }}}

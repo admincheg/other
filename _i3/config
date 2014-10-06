@@ -9,218 +9,149 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-set $win Mod4
-set $mpd_socket "/home/pavlihin/.mpd/socket"
+set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+#font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # The font above is very space-efficient, that is, it looks good, sharp and
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
-font pango:Anonymous Pro Minus 9
-force_xinerama yes
-hide_edge_borders vertical
-focus_follows_mouse no
+# font pango:DejaVu Sans Mono 10
+font pango:Inconsolata for Powerline 10
 
-# Use Mouse+$win to drag floating windows to their wanted position
-floating_modifier $win
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
 
 # start a terminal
-bindsym $win+Return exec "urxvt"
-bindsym $win+Shift+Return exec "urxvt -name mcabber"
+bindsym $mod+Return exec urxvt
+bindsym $mod+Shift+Return exec urxvt -name mcabber
 
 # kill focused window
-bindsym $win+Shift+q kill
+bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $win+d exec dmenu_run -b -fn "Inconsolata-14" -nf "#00EE00" -nb black
+bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-# bindsym $win+d exec --no-startup-id i3-dmenu-desktop
-
-bindsym XF86AudioRaiseVolume exec amixer set Master 2%+
-bindsym XF86AudioLowerVolume exec amixer set Master 2%-
-bindsym XF86AudioMute exec amixer set Master toggle
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $win+j focus left
-bindsym $win+k focus down
-bindsym $win+l focus up
-bindsym $win+semicolon focus right
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
-bindsym $win+Left focus left
-bindsym $win+Down focus down
-bindsym $win+Up focus up
-bindsym $win+Right focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
 
 # move focused window
-bindsym $win+Shift+j move left
-bindsym $win+Shift+k move down
-bindsym $win+Shift+l move up
-bindsym $win+Shift+semicolon move right
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+colon move right
 
 # alternatively, you can use the cursor keys:
-bindsym $win+Shift+Left move left
-bindsym $win+Shift+Down move down
-bindsym $win+Shift+Up move up
-bindsym $win+Shift+Right move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $win+h split h
+bindsym $mod+h split h
 
 # split in vertical orientation
-bindsym $win+v split v
+bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
-bindsym $win+f fullscreen
-
-bindsym XF86Tools exec [ -z "`pgrep mpd`" ] && mpd && notify-send "MPD" "Player is started"
-bindsym XF86AudioPlay exec mpc -h $mpd_socket toggle | head -n2 | sed 's/\(.*\)/"\1"/' | tr "\n" " " | sed -e 's/^"\(.*\)" \"\[\(.*\)\].*/"\2" "\1"/' -e '/playing/{s/playing/MPD воспроизводит/}' -e '/paused/{s/paused/MPD остановлен/}' | xargs notify-send
-bindsym XF86Back exec mpc -h $mpd_socket prev | sed -e '1!d' -e 's/\(.*\)/"MPD Предыдущая песня" "\1"/' | xargs notify-send
-bindsym XF86Forward exec mpc -h $mpd_socket next | sed -e '1!d' -e 's/\(.*\)/"MPD Следующая песня" "\1"/' | xargs notify-send
+bindsym $mod+f fullscreen
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $win+s layout stacking
-bindsym $win+w layout tabbed
-bindsym $win+e layout toggle split
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $win+Shift+space floating toggle
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $win+a focus parent
+bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $win+d focus child
-workspace 1 output xinerama-0
-workspace 2 output xinerama-0
-workspace 3 output xinerama-0
-workspace 4 output xinerama-0
-workspace 5 output xinerama-0
-workspace 6 output xinerama-0
-workspace 7 output xinerama-0
-workspace 8 output xinerama-0
-workspace 9 output xinerama-0
-workspace 10 output xinerama-0
-workspace 11 output xinerama-1
-workspace 12 output xinerama-1
-workspace 13 output xinerama-1
-workspace 14 output xinerama-1
-workspace 15 output xinerama-1
-workspace 16 output xinerama-1
-workspace 17 output xinerama-1
-workspace 18 output xinerama-1
-workspace 19 output xinerama-1
-workspace 20 output xinerama-1
+#bindsym $mod+d focus child
 
 # switch to workspace
-bindsym $win+1 workspace 1
-bindsym $win+2 workspace 2
-bindsym $win+3 workspace 3
-bindsym $win+4 workspace 4
-bindsym $win+5 workspace 5
-bindsym $win+6 workspace 6
-bindsym $win+7 workspace 7
-bindsym $win+8 workspace 8
-bindsym $win+9 workspace 9
-bindsym $win+0 workspace 10
-bindsym $win+F1 workspace 11
-bindsym $win+F2 workspace 12
-bindsym $win+F3 workspace 13
-bindsym $win+F4 workspace 14
-bindsym $win+F5 workspace 15
-bindsym $win+F6 workspace 16
-bindsym $win+F7 workspace 17
-bindsym $win+F8 workspace 18
-bindsym $win+F9 workspace 19
-bindsym $win+F10 workspace 20
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
 
 # move focused container to workspace
-bindsym $win+Shift+1 move container to workspace 1
-bindsym $win+Shift+2 move container to workspace 2
-bindsym $win+Shift+3 move container to workspace 3
-bindsym $win+Shift+4 move container to workspace 4
-bindsym $win+Shift+5 move container to workspace 5
-bindsym $win+Shift+6 move container to workspace 6
-bindsym $win+Shift+7 move container to workspace 7
-bindsym $win+Shift+8 move container to workspace 8
-bindsym $win+Shift+9 move container to workspace 9
-bindsym $win+Shift+0 move container to workspace 10
-bindsym $win+Shift+F1 move container to workspace 11
-bindsym $win+Shift+F2 move container to workspace 12
-bindsym $win+Shift+F3 move container to workspace 13
-bindsym $win+Shift+F4 move container to workspace 14
-bindsym $win+Shift+F5 move container to workspace 15
-bindsym $win+Shift+F6 move container to workspace 16
-bindsym $win+Shift+F7 move container to workspace 17
-bindsym $win+Shift+F8 move container to workspace 18
-bindsym $win+Shift+F9 move container to workspace 19
-bindsym $win+Shift+F10 move container to workspace 20
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
 
 # reload the configuration file
-bindsym $win+Shift+c reload
+bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $win+Shift+r restart
+bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $win+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-
-bindsym Control+Mod1+Delete exec "xscreensaver-command -lock"
-bindsym Print exec "scrot ~/screenshots/%b\ %d-%H:%M:%S.png"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-# These bindings trigger as soon as you enter the resize mode
+        # These bindings trigger as soon as you enter the resize mode
 
-# Pressing left will shrink the window’s width.
-# Pressing right will grow the window’s width.
-# Pressing up will shrink the window’s height.
-# Pressing down will grow the window’s height.
-  bindsym j resize shrink width 10 px or 10 ppt
-    bindsym k resize grow height 10 px or 10 ppt
-    bindsym l resize shrink height 10 px or 10 ppt
-    bindsym semicolon resize grow width 10 px or 10 ppt
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
 
-# same bindings, but for the arrow keys
-    bindsym Left resize shrink width 10 px or 10 ppt
-    bindsym Down resize grow height 10 px or 10 ppt
-    bindsym Up resize shrink height 10 px or 10 ppt
-    bindsym Right resize grow width 10 px or 10 ppt
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
 
-# back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
 }
 
-bindsym $win+r mode "resize"
+bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-  id left-bott
-  status_command /home/pavlihin/.scripts/conky-i3wm
-  mode hide
-  hidden_state hide
-  modifier $win
-  output xinerama-0
+				status_command /home/ipavlihin/.scripts/conky-i3wm
 }
-
-bar {
-  id right-bott
-  status_command i3status
-  mode hide
-  hidden_state hide
-  modifier $win
-  output xinerama-1
-}
-
 for_window [class="URxvt"] border none
-for_window [class="Chromium-browser"] border none
 
-exec feh --bg-max /home/pavlihin/.i3/background.jpg
-exec xcompmgr -f -F
-exec xscreensaver -no-splash
-exec dunst
+exec setxkbmap -model pc105 -layout us,ru -variant , -option grp:caps_toggle
+exec xcompmgr -f -F &
+exec feh --bg-fill .i3/owl.jpg
