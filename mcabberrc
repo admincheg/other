@@ -5,7 +5,7 @@ set lang = ru
 set mnotify_enable = 1
 set roster_display_filter = ofdna
 # }}}
-#
+
 # Dictionary {{{
 set aspell_enable = 1
 set aspell_lang = ru_RU
